@@ -1,0 +1,14 @@
+{
+  "agent_dir": "<absolute path to a git clone of the grafana/agent repository>",
+  "tempo_dir": "<absolute path to a git clone of the grafana/tempo repository>",
+  "grafana": {
+    "url": "<url of your Grafana instance, for instance https://yourname.grafana.net>",
+    "token": "<API key from your Grafana instance>"
+  },
+  "grafana_cloud": {
+    "api_key": "<API key from your Grafana Cloud Portal>",
+    "metrics_tenant": "<tenant ID of your Prometheus datasource>",
+    "logs_tenant": "<tenant ID of your Loki datasource>",
+    "traces_tenant": "<tenant ID of your Tempo datasource>"
+  }
+}

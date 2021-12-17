@@ -1,0 +1,11 @@
+--- vendor/grafana-agent/v1/lib/logs.libsonnet	2021-12-17 22:51:16.000000000 +0100
++++ vendor/grafana-agent/v1/lib/logs.libsonnet	2021-12-17 23:39:15.000000000 +0100
+@@ -73,7 +73,7 @@
+       k.util.hostVolumeMount('varlibdockercontainers', '/var/lib/docker/containers', '/var/lib/docker/containers', readOnly=true) +
+
+       // For reading journald
+-      k.util.hostVolumeMount('etcmachineid', '/etc/machine-id', '/etc/machine-id', readOnly=true),
++      {},  //k.util.hostVolumeMount('etcmachineid', '/etc/machine-id', '/etc/machine-id', readOnly=true),
+   },
+
+   // scrapeKubernetesLogs defines a Logs config that can collect logs from

@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/agent.git",
+          "subdir": "production/tanka/grafana-agent"
+        }
+      },
+      "version": "f7d9262173b852528af1d12530edc5b004909694",
+      "sum": "Pza++MPlWTvRgN8yHvRhr6EQL1QNrWdRIPwRGKtC1bo="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "grafana"
+        }
+      },
+      "version": "3f17cac91d85f4e79d00373e3a8e7ad82d9cefbf",
+      "sum": "7rANfqY8ERvoABHbwoGsdGpUeHxxYCSVOcM4Eky4QtQ="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "ksonnet-util"
+        }
+      },
+      "version": "3f17cac91d85f4e79d00373e3a8e7ad82d9cefbf",
+      "sum": "JDsc/bUs5Yv1RkGKcm0hMteqCKZqemxA3qP6eiEATr8="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "memcached"
+        }
+      },
+      "version": "3f17cac91d85f4e79d00373e3a8e7ad82d9cefbf",
+      "sum": "dTOeEux3t9bYSqP2L/uCuLo/wUDpCKH4w+4OD9fePUk="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "prometheus"
+        }
+      },
+      "version": "3f17cac91d85f4e79d00373e3a8e7ad82d9cefbf",
+      "sum": "cbOEF2+zrSZw9mI2Y3bgKCx98AiA/YdT8KT9YqBq6dg="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/ksonnet/ksonnet-lib.git",
+          "subdir": "ksonnet.beta.4"
+        }
+      },
+      "version": "0d2f82676817bbf9e4acf6495b2090205f323b9f",
+      "sum": "ur22hPQq0JAPBxm8hNMcwjumj4MkozDwOKiGZvVMYh4="
+    }
+  ],
+  "legacyImports": false
+}

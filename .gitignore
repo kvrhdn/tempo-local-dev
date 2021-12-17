@@ -1,0 +1,13 @@
+dashboards/agent/agent
+dashboards/agent/json
+dashboards/agent/vendor
+
+dashboards/.terraform/
+dashboards/.terraform.lock.hcl
+dashboards/terraform.tfstate
+dashboards/terraform.tfstate.backup
+
+tk/vendor/
+tk/yaml/
+
+config.json
