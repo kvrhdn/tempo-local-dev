@@ -1,4 +1,4 @@
-local mixin = import 'agent/production/grafana-agent-mixin/mixin.libsonnet';
+local mixin = import 'grafana-agent-mixin/mixin.libsonnet';
 
 {
   [name]: std.manifestJsonEx(mixin.grafanaDashboards[name], '  ')
