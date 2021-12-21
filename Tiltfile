@@ -1,9 +1,5 @@
 tempo_dir = decode_json(read_file('config.json'))['tempo_dir']
 
-# Manual tasks
-
-local_resource('tk export', 'make tk')
-
 # Docker builds
 
 custom_build(
@@ -27,7 +23,8 @@ custom_build(
 
 # Kubernetes
 
-k8s_yaml(listdir('tk/yaml/'))
+yaml = local('tk show --dangerous-allow-redirect tk/environments/tempo')
+k8s_yaml(yaml)
 
 k8s_resource('grafana', port_forwards='3000')
 k8s_resource('prometheus', port_forwards='9090')

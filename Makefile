@@ -1,8 +1,4 @@
-run: tk create-cluster tilt
-
-.PHONY: tk
-tk:
-	$(MAKE) -C tk
+run: create-cluster tilt
 
 .PHONY: create-cluster
 create-cluster:
