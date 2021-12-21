@@ -1,4 +1,5 @@
 {
+  // minimize resources so we can pack more components on this poor laptop
   local resources_small = {
     requests: {
       cpu: '100m',

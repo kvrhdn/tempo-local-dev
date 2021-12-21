@@ -16,14 +16,7 @@ minio + tempo_microservices + tempo_scaling + tempo_tracing + {
       receivers: {
         jaeger: {
           protocols: {
-            // traces from synthetic-load-generator
-            thrift_http: null,
             // traces from vulture
-            grpc: null,
-          },
-        },
-        otlp: {
-          protocols: {
             grpc: null,
           },
         },
@@ -38,11 +31,9 @@ minio + tempo_microservices + tempo_scaling + tempo_tracing + {
     //use_otel_tracer: true,
 
     server+: {
-      // just log everything lol
       log_level: 'debug',
     },
-
-    // manually overriding to get tempo to talk to minio
+    // override storage config to get Tempo to talk to minio
     storage+: {
       trace+: {
         s3+: {
@@ -61,9 +52,7 @@ minio + tempo_microservices + tempo_scaling + tempo_tracing + {
 
   tempo_distributor_container+::
     container.withPortsMixin([
-      containerPort.new('jaeger-http', 14268),
       containerPort.new('jaeger-grpc', 14250),
-      containerPort.new('otlp-grpc', 4317),
     ]),
 
   // clear affinity so we can run multiple ingesters on a single node
