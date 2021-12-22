@@ -74,18 +74,30 @@ local k = import 'ksonnet-util/kausal.libsonnet';
       containerPort.new('thrift-http', 14268) +
       containerPort.withProtocol('TCP'),
     ]) +
-    agent.withTracesRemoteWrite([
-      {
-        endpoint: 'tempo-us-central1.grafana.net:443',
-        basic_auth: {
-          username: $._config.grafana_cloud.traces_tenant,
-          password: $._config.grafana_cloud.api_key,
+    agent.withTracesRemoteWrite(
+      [
+        {
+          endpoint: 'tempo-us-central1.grafana.net:443',
+          basic_auth: {
+            username: $._config.grafana_cloud.traces_tenant,
+            password: $._config.grafana_cloud.api_key,
+          },
+          retry_on_failure: {
+            enabled: true,
+          },
         },
-        retry_on_failure: {
-          enabled: true,
-        },
-      },
-    ]) +
+      ] + (
+        if $._config.self_ingest then [
+          {
+            endpoint: 'distributor:4317',
+            insecure: true,
+            retry_on_failure: {
+              enabled: false,
+            },
+          },
+        ] else []
+      )
+    ) +
     agent.withTracesScrapeConfigs(agent.tracesScrapeKubernetes) +
 
     {},

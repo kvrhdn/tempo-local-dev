@@ -16,5 +16,9 @@ agent + grafana + prometheus + tempo + {
     namespace: 'default',
 
     grafana_cloud: local_config.grafana_cloud,
+
+    // whether to send traces to local Tempo, this creates a feedback loop but
+    // results in more and richer traces
+    self_ingest: false,
   },
 }

@@ -14,6 +14,11 @@ minio + tempo_microservices + tempo_scaling + tempo_tracing + {
     },
     distributor+: {
       receivers: {
+        otlp: {
+          protocols: {
+            grpc: null,
+          },
+        },
         jaeger: {
           protocols: {
             // traces from vulture
@@ -44,6 +49,15 @@ minio + tempo_microservices + tempo_scaling + tempo_tracing + {
         },
       },
     },
+
+    metrics_generator: {
+      remote_write: {
+        enabled: true,
+        client: {
+          url: 'http://prometheus:9090/prometheus/api/v1/write',
+        },
+      },
+    },
   },
 
   local k = import 'ksonnet-util/kausal.libsonnet',
@@ -52,6 +66,7 @@ minio + tempo_microservices + tempo_scaling + tempo_tracing + {
 
   tempo_distributor_container+::
     container.withPortsMixin([
+      containerPort.new('otlp-grpc', 4317),
       containerPort.new('jaeger-grpc', 14250),
     ]),
 
