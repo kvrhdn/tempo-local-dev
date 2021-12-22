@@ -14,9 +14,6 @@
   tempo_ingester_container+::
     jaeger_tracing,
 
-  tempo_generator_container+::
-    jaeger_tracing,
-
   tempo_compactor_container+::
     jaeger_tracing,
 

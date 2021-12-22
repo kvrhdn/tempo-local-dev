@@ -1,9 +1,8 @@
 local agent = import 'agent.libsonnet';
 local grafana = import 'grafana.libsonnet';
-local prometheus = import 'prometheus.libsonnet';
 local tempo = import 'tempo.libsonnet';
 
-agent + grafana + prometheus + tempo + {
+agent + grafana + tempo + {
 
   local local_config = import '../../config.json',
 

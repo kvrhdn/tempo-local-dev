@@ -33,7 +33,6 @@ k8s_resource('query-frontend', port_forwards=['3200', '16686'])
 k8s_resource('querier', port_forwards=['3201'])
 k8s_resource('distributor', port_forwards=['3202', '4317'])
 k8s_resource('ingester', port_forwards=['3203'])
-k8s_resource('metrics-generator', port_forwards=['3204'])
 k8s_resource('compactor', port_forwards=['3205'])
 
 k8s_resource('minio', port_forwards=['9000'])
