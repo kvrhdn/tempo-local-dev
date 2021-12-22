@@ -22,14 +22,17 @@ local grafana = import 'grafana/grafana.libsonnet';
 
     grafana.addDatasource(
       'tempo',
-      grafana.datasource.new('Tempo', 'http://query-frontend:3200', 'tempo', default=true),
+      grafana.datasource.new('Tempo', 'http://query-frontend:3200', 'tempo', default=true) +
+      { uid: 'tempo' },
     ) +
     grafana.addDatasource(
       'jaeger',
-      grafana.datasource.new('Jaeger (but actually Tempo)', 'http://query-frontend:16686', 'jaeger'),
+      grafana.datasource.new('Jaeger (but actually Tempo)', 'http://query-frontend:16686', 'jaeger') +
+      { uid: 'jaeger' },
     ) +
     grafana.addDatasource(
       'prometheus',
-      grafana.datasource.new('Prometheus', 'http://prometheus/prometheus', 'prometheus'),
+      grafana.datasource.new('Prometheus', 'http://prometheus/prometheus', 'prometheus') +
+      { uid: 'prometheus' },
     ),
 }
