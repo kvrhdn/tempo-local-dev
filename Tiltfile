@@ -27,7 +27,6 @@ yaml = local('tk show --dangerous-allow-redirect tk/environments/tempo')
 k8s_yaml(yaml)
 
 k8s_resource('grafana', port_forwards='3000')
-k8s_resource('prometheus', port_forwards='9090')
 
 k8s_resource('query-frontend', port_forwards=['3200', '16686'])
 k8s_resource('querier', port_forwards=['3201'])
