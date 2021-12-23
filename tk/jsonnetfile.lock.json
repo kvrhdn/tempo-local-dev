@@ -8,8 +8,8 @@
           "subdir": "production/tanka/grafana-agent"
         }
       },
-      "version": "2a74dcb478081d0c5e6804db322d3521aec3a049",
-      "sum": "Pza++MPlWTvRgN8yHvRhr6EQL1QNrWdRIPwRGKtC1bo="
+      "version": "b0fccefac4a40d83618711b36cd5236d6691be01",
+      "sum": "Uq5zuD5Zzvr1aXdO/XQ11zehalisQxoNfCZ2Ymy6ju4="
     },
     {
       "source": {
@@ -18,8 +18,8 @@
           "subdir": "grafana"
         }
       },
-      "version": "264a5c2078c5930af57fe2d107eff83ab63553af",
-      "sum": "7rANfqY8ERvoABHbwoGsdGpUeHxxYCSVOcM4Eky4QtQ="
+      "version": "3517c7c0889d0cb29d89b5e67e03f11d30bc99d3",
+      "sum": "Y5nheroSOIwmE+djEVPq4OvvTxKenzdHhpEwaR3Ebjs="
     },
     {
       "source": {
@@ -28,8 +28,8 @@
           "subdir": "ksonnet-util"
         }
       },
-      "version": "264a5c2078c5930af57fe2d107eff83ab63553af",
-      "sum": "JDsc/bUs5Yv1RkGKcm0hMteqCKZqemxA3qP6eiEATr8="
+      "version": "3517c7c0889d0cb29d89b5e67e03f11d30bc99d3",
+      "sum": "QiIOYQ0mdyVXStdPxu99M5CYGtYAXczWAC62EAQmWBM="
     },
     {
       "source": {
@@ -38,8 +38,28 @@
           "subdir": "memcached"
         }
       },
-      "version": "264a5c2078c5930af57fe2d107eff83ab63553af",
-      "sum": "dTOeEux3t9bYSqP2L/uCuLo/wUDpCKH4w+4OD9fePUk="
+      "version": "3517c7c0889d0cb29d89b5e67e03f11d30bc99d3",
+      "sum": "8hXTN4QOMkpad75LESkdfRD4/Sl81fMqZcD0ZPx2SNc="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/grafana/jsonnet-libs.git",
+          "subdir": "prometheus"
+        }
+      },
+      "version": "3517c7c0889d0cb29d89b5e67e03f11d30bc99d3",
+      "sum": "n5hfvTzxTTAJxRZDIaldGjxJmcfx1mF0JkojWZrlxG8="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/jsonnet-libs/k8s-libsonnet.git",
+          "subdir": "1.20"
+        }
+      },
+      "version": "12ea89d1fa76e716565b2885492da3163e62dd90",
+      "sum": "Pp9RCh4EkWpmQ5GsgtgJvqFqpBPHoZufMaQ6ejY4EeE="
     },
     {
       "source": {

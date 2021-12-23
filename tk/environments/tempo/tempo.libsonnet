@@ -7,6 +7,7 @@ minio + tempo_microservices + tempo_scaling + tempo_tracing + {
 
   _config+:: {
     search_enabled: true,
+    metrics_generator_enabled: true,
 
     ingester+: {
       pvc_size: '1Gi',
@@ -30,6 +31,8 @@ minio + tempo_microservices + tempo_scaling + tempo_tracing + {
 
     backend: 's3',
     bucket: 'tempo',
+
+    overrides: import 'tempo_overrides.libsonnet',
   },
 
   tempo_config+:: {
@@ -47,6 +50,26 @@ minio + tempo_microservices + tempo_scaling + tempo_tracing + {
           secret_key: 'supersecret',
           insecure: true,
         },
+      },
+    },
+
+    metrics_generator+: {
+      processor+: {
+        service_graphs+: {
+          dimensions: ['cluster', 'namespace'],
+        },
+        span_metrics+: {
+          dimensions: ['cluster', 'namespace'],
+        },
+      },
+      storage+: {
+        path: '/var/tempo/wal',
+        remote_write+: [
+          {
+            url: 'http://prometheus:9090/prometheus/api/v1/write',
+            send_exemplars: true,
+          },
+        ],
       },
     },
   },

@@ -27,11 +27,13 @@ yaml = local('tk show --dangerous-allow-redirect tk/environments/tempo')
 k8s_yaml(yaml)
 
 k8s_resource('grafana', port_forwards='3000')
+k8s_resource('prometheus', port_forwards='9090')
 
-k8s_resource('query-frontend', port_forwards=['3200', '16686'])
-k8s_resource('querier', port_forwards=['3201'])
-k8s_resource('distributor', port_forwards=['3202', '4317'])
-k8s_resource('ingester', port_forwards=['3203'])
-k8s_resource('compactor', port_forwards=['3205'])
+k8s_resource('query-frontend', port_forwards=['3200:3200', '16686'])
+k8s_resource('querier', port_forwards=['3201:3200'])
+k8s_resource('distributor', port_forwards=['3202:3200', '4317'])
+k8s_resource('ingester', port_forwards=['3203:3200'])
+k8s_resource('metrics-generator', port_forwards=['3204:3200'])
+k8s_resource('compactor', port_forwards=['3205:3200'])
 
 k8s_resource('minio', port_forwards=['9000'])
