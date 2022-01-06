@@ -57,6 +57,12 @@ local k = import 'ksonnet-util/kausal.libsonnet';
           },
         },
       },
+      spanmetrics: {
+        metrics_instance: 'kubernetes',
+      },
+      service_graphs: {
+        enabled: true,
+      },
       //tail_sampling: {
       //  policies: [
       //    {
