@@ -20,6 +20,10 @@
       replicas: 3,
       resources: resources_small,
     },
+    metrics_generator+: {
+      replicas: 2,
+      resources: resources_small,
+    },
     compactor+: {
       replicas: 1,
       resources: resources_small,

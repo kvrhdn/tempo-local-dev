@@ -15,7 +15,7 @@ local grafana = import 'grafana/grafana.libsonnet';
     grafana.withGrafanaIniConfig({
       sections+: {
         feature_toggles: {
-          enable: 'tempoSearch,tempoServiceGraph',
+          enable: 'tempoSearch,tempoServiceGraph,tempoApmTable',
         },
       },
     }) +
@@ -23,6 +23,12 @@ local grafana = import 'grafana/grafana.libsonnet';
     grafana.addDatasource(
       'tempo',
       grafana.datasource.new('Tempo', 'http://query-frontend:3200', 'tempo', default=true) +
+      grafana.datasource.withJsonData({
+        httpMethod: 'GET',
+        serviceMap: {
+          datasourceUid: 'prometheus',
+        },
+      }) +
       { uid: 'tempo' },
     ) +
     grafana.addDatasource(
