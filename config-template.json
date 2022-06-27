@@ -7,8 +7,17 @@
   },
   "grafana_cloud": {
     "api_key": "<API key from your Grafana Cloud Portal>",
-    "metrics_tenant": "<tenant ID of your Prometheus datasource>",
-    "logs_tenant": "<tenant ID of your Loki datasource>",
-    "traces_tenant": "<tenant ID of your Tempo datasource>"
+    "metrics": {
+      "tenant": "<tenant ID of your Prometheus datasource>",
+      "url": "<remote write write URL of your Prometheus datasource>"
+    },
+    "logs": {
+      "tenant": "<tenant ID of your Loki datasource>",
+      "hostname": "<hostname of your of your Loki datasource>"
+    },
+    "traces": {
+      "tenant": "<tenant ID of your Tempo datasource>",
+      "endpoint": "<endpoint of your of your Tempo datasource>"
+    }
   }
 }

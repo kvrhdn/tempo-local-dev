@@ -29,9 +29,9 @@ local k = import 'ksonnet-util/kausal.libsonnet';
     agent.withMetricsInstances(agent.scrapeInstanceKubernetes {}) +
     agent.withRemoteWrite([
       {
-        url: 'https://prometheus-blocks-prod-us-central1.grafana.net/api/prom/push',
+        url: $._config.grafana_cloud.metrics.url,
         basic_auth: {
-          username: $._config.grafana_cloud.metrics_tenant,
+          username: $._config.grafana_cloud.metrics.tenant,
           password: $._config.grafana_cloud.api_key,
         },
       },
@@ -42,8 +42,8 @@ local k = import 'ksonnet-util/kausal.libsonnet';
     agent.withLogsClients(
       agent.newLogsClient({
         scheme: 'https',
-        hostname: 'logs-prod-us-central1.grafana.net',
-        username: $._config.grafana_cloud.logs_tenant,
+        hostname: $._config.grafana_cloud.logs.hostname,
+        username: $._config.grafana_cloud.logs.tenant,
         password: $._config.grafana_cloud.api_key,
       })
     ) +
@@ -83,9 +83,9 @@ local k = import 'ksonnet-util/kausal.libsonnet';
     agent.withTracesRemoteWrite(
       [
         {
-          endpoint: 'tempo-us-central1.grafana.net:443',
+          endpoint: '%s:443' % $._config.grafana_cloud.traces.endpoint,
           basic_auth: {
-            username: $._config.grafana_cloud.traces_tenant,
+            username: $._config.grafana_cloud.traces.tenant,
             password: $._config.grafana_cloud.api_key,
           },
           retry_on_failure: {
