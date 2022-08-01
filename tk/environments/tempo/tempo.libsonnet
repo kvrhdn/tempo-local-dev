@@ -13,6 +13,14 @@ minio + tempo_microservices + tempo_scaling + tempo_tracing + {
       pvc_size: '1Gi',
       pvc_storage_class: 'local-path',
     },
+    tempo_ssb+: {
+      pvc_size: '1Gi',
+      pvc_storage_class: 'local-path',
+    },
+    metrics_generator+: {
+      ephemeral_storage_request_size: '1Mi',
+      ephemeral_storage_limit_size: '2Mi',
+    },
     distributor+: {
       receivers: {
         otlp: {
