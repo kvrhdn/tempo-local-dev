@@ -1,0 +1,58 @@
+## A Tiltfile for manaing resources from the `tempo-distributed` helm chart.
+
+update_settings(suppress_unused_image_warnings=["grafana/enterprise-traces"])
+
+config = decode_json(read_file('../config.json'))
+enterprise_traces_dir = config['enterprise_traces_dir']
+#enterprise_license = decode_json(read_file('config.json'))['grafana_enterprise']['license']
+enterprise_license = str(read_file("%s/development/fixtures/license.jwt" % enterprise_traces_dir))
+
+
+# Send logs and metric to the cloud
+cloud = config['grafana_cloud']
+cloud_api_key = cloud['api_key']
+cloud_logs = cloud['logs']
+cloud_metrics = cloud['metrics']
+
+custom_build(
+    'grafana/enterprise-traces',
+    'cd ' + enterprise_traces_dir + ' && make enterprise-traces-image && docker tag us.gcr.io/kubernetes-dev/enterprise-traces:latest grafana/enterprise-traces:latest',
+    tag='latest',
+    deps=[enterprise_traces_dir + '/cmd/enterprise-traces/', enterprise_traces_dir + '/vendor/'],
+)
+
+k8s_yaml(helm(config['helm_charts_dir'] + '/charts/tempo-distributed',
+  name='tempo-distributed',
+  values='./enterprise-values.yaml',
+  #values='./fixture2.yaml',
+  set=[
+  'license.contents='+ enterprise_license,
+  'metaMonitoring.grafanaAgent.logs.remote.url='+ cloud_logs["url"],
+  # 'metaMonitoring.grafanaAgent.logs.remote.auth.username='+ cloud_logs["tenant"],
+  'metaMonitoring.grafanaAgent.metrics.remote.url='+ cloud_metrics["url"],
+  # 'metaMonitoring.grafanaAgent.metrics.remote.auth.username='+ cloud_metrics["tenant"],
+  ]
+))
+
+
+k8s_yaml(local('tk show --dangerous-allow-redirect ../tk/environments/enterprise-traces'))
+
+k8s_resource('grafana', port_forwards='3000', labels=["obs"]) 
+k8s_resource('tempo-distributed-grafana-agent-operator', labels=["obs"])
+
+k8s_resource('tempo-distributed-minio', port_forwards=['9000', '9001'], labels=["storage"])
+k8s_resource('tempo-distributed-minio-make-bucket-job', labels=["storage"])
+k8s_resource('tempo-distributed-minio-make-user-job', labels=["storage"])
+k8s_resource('tempo-distributed-memcached', labels=["storage"])
+
+k8s_resource('tempo-distributed-admin-api', labels=["enterprise"], resource_deps=['tempo-distributed-minio'])
+k8s_resource('tempo-distributed-enterprise-gateway', labels=["enterprise"], port_forwards=['4317'], resource_deps=['tempo-distributed-minio'])
+k8s_resource('tempo-distributed-tokengen-job', labels=["enterprise"], resource_deps=['tempo-distributed-minio'])
+
+k8s_resource('tempo-distributed-distributor', labels=["tempo"], resource_deps=['tempo-distributed-minio'])
+k8s_resource('tempo-distributed-ingester', labels=["tempo"], resource_deps=['tempo-distributed-minio'])
+k8s_resource('tempo-distributed-metrics-generator', labels=["tempo"], resource_deps=['tempo-distributed-minio'])
+k8s_resource('tempo-distributed-querier', labels=["tempo"], resource_deps=['tempo-distributed-minio'])
+k8s_resource('tempo-distributed-query-frontend', labels=["tempo"], resource_deps=['tempo-distributed-minio'])
+k8s_resource('tempo-distributed-compactor', labels=["tempo"], resource_deps=['tempo-distributed-minio'])
+

@@ -1,6 +1,8 @@
 {
   "agent_dir": "<absolute path to a git clone of the grafana/agent repository>",
   "tempo_dir": "<absolute path to a git clone of the grafana/tempo repository>",
+  "enterprise_traces_dir": "<absolute path to a git clone of the grafana/tempo repository>",
+  "helm_charts_dir": "<absolute path to a git clone of the grafana/helm-charts repository>",
   "grafana": {
     "url": "<url of your Grafana instance, for instance https://yourname.grafana.net>",
     "token": "<API key from your Grafana instance>"
@@ -19,5 +21,8 @@
       "tenant": "<tenant ID of your Tempo datasource>",
       "endpoint": "<endpoint of your of your Tempo datasource>"
     }
+  },
+  "grafana_enterprise": {
+    "license": "<grafana enterprise license>"
   }
 }
