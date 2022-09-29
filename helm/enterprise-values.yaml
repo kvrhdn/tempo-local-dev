@@ -1,0 +1,99 @@
+#fullNameOverride: 'ge-traces'
+#nameOverride: ge-traces
+
+multitenancyEnabled: true
+
+tempo:
+  image:
+    pullPolicy: Always
+  structuredConfig:
+    http_api_prefix: '/tempo'
+
+enterprise:
+  enabled: true
+  # image:
+  # tag: latest
+  # tag: v1.3.0
+  # tag: weekly-r53-0285499a
+
+enterpriseGateway:
+  enabled: true
+
+#   extraArgs:
+#     http-api-prefix: '/gnar'
+
+# queryFrontend:
+#   extraArgs: ['-http-api-prefix=/gnar']
+
+server:
+  logLevel: debug
+
+metricsGenerator:
+  enabled: true
+  affinity: {}
+search:
+  enabled: true
+metaMonitoring:
+  serviceMonitor:
+    enabled: true
+  grafanaAgent:
+    enabled: true
+    installOperator: true
+    logs:
+      remote:
+        # url: "https://example.com/loki/api/v1/push"
+        auth:
+          username: '234749'
+          passwordSecretName: 'metamonitoring-credentials'
+          passwordSecretKey: 'cloud-api-key'
+
+    metrics:
+      remote:
+        # url: "https://example.com/api/v1/push"
+        auth:
+          username: '471558'
+          passwordSecretName: 'metamonitoring-credentials'
+          passwordSecretKey: 'cloud-api-key'
+
+      scrapeK8s:
+        enabled: true
+        kubeStateMetrics:
+          namespace: kube-system
+          labelSelectors:
+            app.kubernetes.io/name: kube-state-metrics
+
+minio:
+  enabled: true
+
+traces:
+  otlp:
+    grpc:
+      enabled: true
+
+ingester:
+  persistence:
+    enabled: true
+    size: 2Gi
+  affinity: {}
+
+distributor:
+  config:
+    log_received_spans:
+      enabled: true
+  affinity: {}
+
+querier:
+  affinity: {}
+
+queryFrontend:
+  affinity: {}
+
+storage:
+  trace:
+    backend: s3
+    s3:
+      access_key: 'grafana-tempo'
+      bucket: 'enterprise-traces'
+      endpoint: 'tempo-distributed-minio:9000'
+      insecure: true
+      secret_key: 'supersecret'
