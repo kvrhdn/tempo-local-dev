@@ -1,5 +1,5 @@
-#fullNameOverride: 'ge-traces'
-#nameOverride: ge-traces
+# fullNameOverride: ge-traces
+# nameOverride: ge-traces
 
 multitenancyEnabled: true
 
@@ -19,20 +19,16 @@ enterprise:
 enterpriseGateway:
   enabled: true
 
-#   extraArgs:
-#     http-api-prefix: '/gnar'
-
-# queryFrontend:
-#   extraArgs: ['-http-api-prefix=/gnar']
-
 server:
   logLevel: debug
 
 metricsGenerator:
   enabled: true
   affinity: {}
+
 search:
   enabled: true
+
 metaMonitoring:
   serviceMonitor:
     enabled: true
@@ -54,7 +50,6 @@ metaMonitoring:
           username: '471558'
           passwordSecretName: 'metamonitoring-credentials'
           passwordSecretKey: 'cloud-api-key'
-
       scrapeK8s:
         enabled: true
         kubeStateMetrics:
@@ -77,6 +72,7 @@ ingester:
   affinity: {}
 
 distributor:
+  replicas: 2
   config:
     log_received_spans:
       enabled: true
