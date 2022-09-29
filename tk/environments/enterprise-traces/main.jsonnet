@@ -51,7 +51,7 @@ local grafana = import 'grafana/grafana.libsonnet';
     grafana.withTheme('dark') +
     grafana.withRootUrl('http://localhost:3000') +
     grafana.withImage($._images.grafana) +
-    grafana.withEnterpriseLicenseText($._enterprise.license) +
+    grafana.withEnterpriseLicenseText(this._enterprise.license) +
     grafana.addPlugin('grafana-enterprise-traces-app') +
 
     grafana.withGrafanaIniConfig({
