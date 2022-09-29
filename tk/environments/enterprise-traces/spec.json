@@ -1,0 +1,13 @@
+{
+  "apiVersion": "tanka.dev/v1alpha1",
+  "kind": "Environment",
+  "metadata": {
+    "name": "environments/enterprise-traces"
+  },
+  "spec": {
+    "apiServer": "https://0.0.0.0:38139",
+    "namespace": "default",
+    "resourceDefaults": {},
+    "expectVersions": {}
+  }
+}

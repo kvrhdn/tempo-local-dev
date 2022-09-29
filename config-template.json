@@ -23,6 +23,7 @@
     }
   },
   "grafana_enterprise": {
+    "token": "<API key from resulting TokenGen job>",
     "license": "<grafana enterprise license>"
   }
 }
