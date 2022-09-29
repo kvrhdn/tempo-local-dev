@@ -7,7 +7,6 @@ enterprise_traces_dir = config['enterprise_traces_dir']
 #enterprise_license = decode_json(read_file('config.json'))['grafana_enterprise']['license']
 enterprise_license = str(read_file("%s/development/fixtures/license.jwt" % enterprise_traces_dir))
 
-
 # Send logs and metric to the cloud
 cloud = config['grafana_cloud']
 cloud_api_key = cloud['api_key']
